@@ -1,8 +1,9 @@
 import type { ApiError } from "@/types/files"
 import { config } from "@/config/config"
 
-const API_BASE_URL =
-  config.API_BASE_URL?.replace(/\/$/, "") ?? defaultApiBaseUrl()
+const API_BASE_URL = config.API_BASE_URL?.replace(/\/$/, "")
+
+console.log("API Base URL:", API_BASE_URL)
 
 const DEFAULT_TIMEOUT_MS = 15000
 
@@ -41,7 +42,10 @@ export async function apiRequest<T>(
 
   const controller = new AbortController()
   const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs)
-  const { signal: combinedSignal, cleanup: cleanupSignals } = mergeSignals(signal, controller.signal)
+  const { signal: combinedSignal, cleanup: cleanupSignals } = mergeSignals(
+    signal,
+    controller.signal
+  )
 
   try {
     const response = await fetch(`${API_BASE_URL}${path}`, {

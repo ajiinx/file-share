@@ -128,23 +128,13 @@ export function DownloadPage() {
     setContentError("")
 
     try {
-      const blob = await fetchFileContent(token, { password, download })
-      const objectUrl = URL.createObjectURL(blob)
+      const { url } = await fetchFileContent(token, { password, download })
 
       if (download) {
-        const anchor = document.createElement("a")
-        anchor.href = objectUrl
-        anchor.download = metadata?.name ?? "download"
-        anchor.click()
-        URL.revokeObjectURL(objectUrl)
+        window.location.href = url
         toast.success("Download started")
       } else {
-        setPreviewUrl((currentUrl) => {
-          if (currentUrl) {
-            URL.revokeObjectURL(currentUrl)
-          }
-          return objectUrl
-        })
+        setPreviewUrl(url)
       }
 
       await loadMetadata(password)
@@ -191,12 +181,9 @@ export function DownloadPage() {
     }
   }, [token])
 
+  // No more URL.revokeObjectURL needed since we use real URLs now.
   useEffect(() => {
-    return () => {
-      if (previewUrl) {
-        URL.revokeObjectURL(previewUrl)
-      }
-    }
+    // keeping empty effect or removing it
   }, [previewUrl])
 
   async function handleCopyUrl() {

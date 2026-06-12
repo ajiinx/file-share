@@ -47,10 +47,9 @@ export async function fetchFileContent(
   token: string,
   options: { password?: string; download?: boolean }
 ) {
-  return apiRequest<Blob>(
+  return apiRequest<{ url: string }>(
     `/api/files/${token}/content?download=${Boolean(options.download)}`,
     {
-      parseAs: "blob",
       headers: options.password?.trim()
         ? { "X-File-Password": options.password.trim() }
         : undefined,
