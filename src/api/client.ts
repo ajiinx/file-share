@@ -148,7 +148,7 @@ export function getPublicBaseUrl() {
   return config.PUBLIC_BASE_URL?.replace(/\/$/, "") ?? window.location.origin
 }
 
-function defaultApiBaseUrl() {
-  const { protocol, hostname } = window.location
-  return `${protocol}//${hostname}:8081`
-}
+// function defaultApiBaseUrl() {
+//   const { protocol, hostname } = window.location
+//   return `${protocol}//${hostname}:8081`
+// }
