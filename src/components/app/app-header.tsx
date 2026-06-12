@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 export function AppHeader() {
   return (
     <header className="flex flex-col gap-3 pb-5 sm:flex-row sm:items-center sm:justify-between">
-      <div className="flex items-center gap-3">
+      <a href="/" className="flex w-fit items-center gap-3 transition-opacity hover:opacity-80">
         <div className="rounded-lg bg-primary p-2 text-primary-foreground">
           <UploadCloud className="size-5" />
         </div>
@@ -17,7 +17,7 @@ export function AppHeader() {
             Fast, simple file sharing
           </h1>
         </div>
-      </div>
+      </a>
 
       <div className="flex items-center gap-2">
         <Badge variant="secondary" className="border-none">Secure links</Badge>
